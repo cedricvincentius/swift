@@ -1,0 +1,17 @@
+# nginx-ingress-service.yaml
+apiVersion: v1
+kind: Service
+metadata:
+  name: nginx-ingress
+  namespace: ingress
+spec:
+  type: ClusterIP
+  selector:
+    name: nginx-ingress-microk8s
+  ports:
+    - name: http
+      port: 80
+      targetPort: 80
+    - name: https
+      port: 443
+      targetPort: 443
