@@ -430,6 +430,7 @@ server:
     annotations:
       kubernetes.io/ingress.class: nginx
       nginx.ingress.kubernetes.io/ssl-redirect: "true"
+      nginx.ingress.kubernetes.io/backend-protocol: "HTTP"
       # |
       # kubernetes.io/ingress.class: nginx
       # kubernetes.io/tls-acme: "true"
@@ -466,7 +467,7 @@ server:
           - vault.swift.co.id
         # The secretName is the name of the Kubernetes secret that contains the TLS certificate and private key.
         # If this is not set, then the ingress will not be configured for TLS.
-        secretName: vault-tls
+        secretName: swift-wildcard-tls
     #  - secretName: chart-example-tls
     #    hosts:
     #      - chart-example.local

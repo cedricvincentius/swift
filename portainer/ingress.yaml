@@ -1,0 +1,26 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: portainer-ingress
+  namespace: portainer
+  annotations:
+    nginx.ingress.kubernetes.io/ssl-redirect: "true"
+    nginx.ingress.kubernetes.io/backend-protocol: "HTTP"
+    kubernetes.io/ingress.class: nginx
+spec:
+  ingressClassName: nginx
+  tls:
+  - hosts:
+    - portainer.swift.co.id
+    secretName: swift-wildcard-tls
+  rules:
+  - host: portainer.swift.co.id
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: portainer
+            port:
+              number: 9000

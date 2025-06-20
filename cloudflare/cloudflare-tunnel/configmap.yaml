@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: cloudflared-config
+  namespace: cloudflared
+data:
+  config.yaml: |
+    tunnel: 4215acf6-d170-4223-b27f-a7a6cc35b8cc
+    credentials-file: /etc/cloudflared/creds/credentials.json
+    ingress:
+      - hostname: vault.swift.co.id
+        service: http://nginx-ingress.ingress.svc.cluster.local
+        originRequest:
+          originServerName: vault.swift.co.id
+      - service: http_status:404

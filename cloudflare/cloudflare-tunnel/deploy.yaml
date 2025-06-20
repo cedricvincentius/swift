@@ -24,9 +24,19 @@ spec:
             - run
             - --token
             - $(TUNNEL_TOKEN)
+            - --url
+            - http://nginx-ingress.ingress.svc.cluster.local:80
           env:
             - name: TUNNEL_TOKEN
               valueFrom:
                 secretKeyRef:
                   name: cloudflared-token
                   key: token
+          volumeMounts:
+            - name: config
+              mountPath: /etc/cloudflared
+              readOnly: true
+      volumes:
+        - name: config
+          configMap:
+            name: cloudflared-config
