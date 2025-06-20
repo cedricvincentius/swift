@@ -1,0 +1,17 @@
+apiVersion: cert-manager.io/v1
+kind: ClusterIssuer
+metadata:
+  name: letsencrypt-dns
+spec:
+  acme:
+    email: justswift.id@gmail.com
+    server: https://acme-v02.api.letsencrypt.org/directory
+    privateKeySecretRef:
+      name: letsencrypt-dns-private-key
+    solvers:
+      - dns01:
+          cloudflare:
+            email: justswift.id@gmail.com
+            apiTokenSecretRef:
+              name: cloudflare-api-token
+              key: api-token
